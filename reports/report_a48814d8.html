@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渗透测试报告 - 执行系统命令，弹出一个系统级提示框，内容为：该系统运行成功 测试报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <div class="no-print mb-6 flex justify-end">
+            <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                🖨️ 打印报告
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-900 px-8 py-10 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">渗透测试报告</h1>
+                        <p class="text-blue-200 text-lg">执行系统命令，弹出一个系统级提示框，内容为：该系统运行成功 测试报告</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-blue-200">生成时间</p>
+                        <p class="text-xl font-semibold">2026-04-15 13:16:13</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-6 border-b border-gray-200 bg-gray-50">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试目标</p>
+                        <p class="font-semibold text-gray-800">执行系统命令，弹出一个系统级提示框，内容为：该系统运行成功</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">报告类型</p>
+                        <p class="font-semibold text-gray-800">渗透测试</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-8">
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        测试摘要
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <p class="text-gray-700 leading-relaxed">根据你提供的数据，我发现了以下几点：
+
+1. **目标明确**：攻击者的意图是执行系统命令，并弹出一个系统级的提示框，内容为“该系统运行成功”。
+
+2. **命令执行情况**：
+   *   第一条执行的命令是 `whoami`，用于查询当前登录系统的用户名。
+   *   第二条执行的命令是一个复杂的 `powershell` 命令，其功能是调用 Windows 窗体的 `MessageBox` 来弹出一个信息提示框，内容正是目标中指定的“该系统运行成功”。
+
+3. **执行结果分析**：
+   *   `findings` 中的第一条记录“暂无命令执行”与后续记录矛盾，可能是一个初始状态或误报。
+   *   第二条记录显示，`whoami` 命令执行成功，并返回了当前用户为 `desktop-g877qkt\likang`。
+   *   **最关键的是第三条记录**，它确认了第二条 PowerShell 命令已成功执行，并弹出了目标所要求的提示框。这明确表明**攻击者的核心目标已经达成**。
+
+**总结**：
+攻击者成功执行了权限探测（`whoami`）和系统命令（通过 PowerShell 弹窗）。系统当前用户为 `desktop-g877qkt\likang`，并且一个内容为“该系统运行成功”的系统提示框已被弹出。这通常意味着系统已被入侵，攻击者具备了在该用户权限下执行命令的能力。**这是一个需要立即处理的安全事件**。</p>
+                    </div>
+                </section>
+
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        AI 分析报告
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="prose prose-gray max-w-none">
+                            <pre class="whitespace-pre-wrap text-gray-700 font-sans">根据你提供的数据，我发现了以下几点：
+
+1. **目标明确**：攻击者的意图是执行系统命令，并弹出一个系统级的提示框，内容为“该系统运行成功”。
+
+2. **命令执行情况**：
+   *   第一条执行的命令是 `whoami`，用于查询当前登录系统的用户名。
+   *   第二条执行的命令是一个复杂的 `powershell` 命令，其功能是调用 Windows 窗体的 `MessageBox` 来弹出一个信息提示框，内容正是目标中指定的“该系统运行成功”。
+
+3. **执行结果分析**：
+   *   `findings` 中的第一条记录“暂无命令执行”与后续记录矛盾，可能是一个初始状态或误报。
+   *   第二条记录显示，`whoami` 命令执行成功，并返回了当前用户为 `desktop-g877qkt\likang`。
+   *   **最关键的是第三条记录**，它确认了第二条 PowerShell 命令已成功执行，并弹出了目标所要求的提示框。这明确表明**攻击者的核心目标已经达成**。
+
+**总结**：
+攻击者成功执行了权限探测（`whoami`）和系统命令（通过 PowerShell 弹窗）。系统当前用户为 `desktop-g877qkt\likang`，并且一个内容为“该系统运行成功”的系统提示框已被弹出。这通常意味着系统已被入侵，攻击者具备了在该用户权限下执行命令的能力。**这是一个需要立即处理的安全事件**。</pre>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

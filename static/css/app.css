@@ -1,0 +1,38 @@
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .user-message { background-color: #3b82f6 !important; }
+        .ai-message { background-color: #f9fafb !important; border: 1px solid #e5e7eb !important; }
+        .chat-container { height: calc(100vh - 180px); min-height: 390px; }
+        .sidebar { transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; }
+        .sidebar-hidden { transform: translateX(-100%); width: 0; overflow: hidden; }
+        .conversation-item { transition: background-color 0.2s; }
+        .conversation-item:hover { background-color: #f3f4f6; }
+        .conversation-item.active { background-color: #eff6ff; border-left: 3px solid #3b82f6; }
+        .toggle-sidebar-btn { transition: transform 0.3s ease-in-out; }
+        .toggle-sidebar-btn.rotated { transform: rotate(180deg); }
+        .thinking-item { transition: all 0.3s ease-in-out; }
+        .thinking-content { font-style: italic; color: #6b7280; background-color: #f9fafb; border-left: 3px solid #93c5fd; padding-left: 12px; }
+        .thinking-content.streaming { animation: pulse-bg 1.5s infinite; }
+        @keyframes pulse-bg {
+            0%, 100% { background-color: #f9fafb; }
+            50% { background-color: #dbeafe; }
+        }
+        .thinking-header.thinking { background-color: #eff6ff !important; }
+        .thinking-header.done { background-color: #dcfce7 !important; }
+        .thinking-header.done .thinking-text { color: #16a34a !important; }
+        .response-indicator { animation: fade-in 0.5s ease-out; }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toast-notification {
+            animation: slide-in 0.3s ease-out, fade-out 0.3s ease-in 2.7s forwards;
+        }
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }

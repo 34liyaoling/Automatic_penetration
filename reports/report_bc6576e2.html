@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渗透测试报告 - findings_03507d52-554f-4665-bf1d-b2a7ec413904 安全报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page { size: A4; margin: 20mm; }
+        @media print { body { margin: 0; } .no-print { display: none !important; } }
+        .severity-critical { background-color: #dc2626; color: white; }
+        .severity-high { background-color: #ea580c; color: white; }
+        .severity-medium { background-color: #ca8a04; color: white; }
+        .severity-low { background-color: #16a34a; color: white; }
+        .severity-info { background-color: #2563eb; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <div class="no-print mb-6 flex justify-end">
+            <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                🖨️ 打印报告
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-900 px-8 py-10 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">渗透测试报告</h1>
+                        <p class="text-blue-200 text-lg">findings_03507d52-554f-4665-bf1d-b2a7ec413904 安全报告</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-blue-200">生成时间</p>
+                        <p class="text-xl font-semibold">2026-04-08 21:40:41</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-6 border-b border-gray-200 bg-gray-50">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试目标</p>
+                        <p class="font-semibold text-gray-800">findings_03507d52-554f-4665-bf1d-b2a7ec413904</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试类型</p>
+                        <p class="font-semibold text-gray-800">漏洞扫描</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">风险等级</p>
+                        <p class="font-semibold text-blue-600 font-bold">安全</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">漏洞总数</p>
+                        <p class="font-semibold text-2xl text-gray-800">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-8">
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        执行摘要
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <p class="text-gray-700 leading-relaxed">本次渗透测试对目标系统进行了全面的安全评估。</p>
+                    </div>
+                </section>
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        发现结果
+                    </h2>
+                    <div class="space-y-4">
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">开始检测</p>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">端口1-10000无开放（可能被防火墙过滤）；服务器为Apache；robots.txt存在；POST请求被重定向至HTTP；dirb/sqlmap命令不存在（环境限制）。</p>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+
+                
+
+                
+
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        安全建议
+                    </h2>
+                    <div class="space-y-3">
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">及时修复发现的高危漏洞</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">加强访问控制和认证机制</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">定期进行安全审计和漏洞扫描</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">建立完善的安全监控体系</p>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+            </div>
+
+            <div class="bg-gray-100 px-8 py-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <p>由智能渗透测试系统生成</p>
+                    <p>报告编号: bc6576e2-d981-4a2c-8601-5693e6ae7d9e</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

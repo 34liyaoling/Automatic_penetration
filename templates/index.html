@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能渗透测试系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <button id="toggleSidebarBtn" onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-gray-100 transition text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <h1 class="text-xl font-bold text-gray-800">智能渗透测试助手</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm text-gray-600">模型:</label>
+                        <select id="llmProvider" class="px-3 py-1 rounded border border-gray-300 text-gray-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">加载中...</option>
+                        </select>
+                        <button onclick="switchLLMProvider()" class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded transition">
+                            切换
+                        </button>
+                    </div>
+                    <span id="connectionStatus" class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                        <span class="text-sm text-gray-600">连接中...</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <aside id="conversationSidebar" class="sidebar fixed left-0 top-[56px] bottom-0 w-72 bg-white shadow-lg z-40 overflow-y-auto">
+        <div class="p-3 border-b border-gray-200">
+            <button onclick="createNewConversation()" class="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                <span class="font-semibold">新建对话</span>
+            </button>
+        </div>
+        <div id="conversationList" class="p-2 space-y-1"></div>
+    </aside>
+
+    <main class="max-w-6xl mx-auto px-4 py-3 transition-all duration-300 ml-72" id="mainContent">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div id="chatContainer" class="chat-container overflow-y-auto p-4 space-y-4">
+                <div class="flex justify-center">
+                    <div class="bg-blue-50 text-blue-700 px-6 py-3 rounded-full text-sm">
+                        👋 你好！我是你的智能渗透测试助手
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="ai-message rounded-2xl rounded-tl-sm px-5 py-4 max-w-[80%]">
+                        <p class="text-gray-800">请告诉我你要测试的目标地址，例如：</p>
+                        <ul class="mt-2 text-sm text-gray-600 space-y-1">
+                            <li>• 192.168.1.1</li>
+                            <li>• example.com</li>
+                            <li>• https://test.example.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 p-3">
+                <div id="contextInfo" class="mb-2 px-3 py-1.5 bg-blue-50 rounded-lg text-sm text-blue-700 hidden">
+                    <span class="font-semibold">当前对话:</span>
+                    <span id="currentConversationName">新对话</span>
+                    <span class="mx-2">|</span>
+                    <span id="contextCount">0</span> 条上下文
+                </div>
+                <form id="chatForm" class="flex items-center space-x-2">
+                    <button type="button" onclick="toggleContextPanel()" class="p-2 rounded-full hover:bg-gray-100 transition" title="上下文设置">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+                    <input type="text" id="messageInput" placeholder="输入目标地址开始测试..."
+                           class="flex-1 px-4 py-2.5 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-sm">
+                    <button type="submit" class="bg-blue-500 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-blue-600 transition flex items-center space-x-2">
+                        <span>发送</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div id="contextPanel" class="hidden border-t border-gray-200 p-3 bg-gray-50">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-semibold text-gray-700 text-sm">上下文设置</h4>
+                    <button onclick="toggleContextPanel()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1">最大迭代次数</label>
+                        <select id="maxIterations" class="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm">
+                            <option value="10">10 次（快速）</option>
+                            <option value="20">20 次</option>
+                            <option value="30">30 次</option>
+                            <option value="50" selected>50 次（默认）</option>
+                            <option value="80">80 次（深入）</option>
+                            <option value="100">100 次（完整）</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1">混合模式</label>
+                        <select id="hybridMode" class="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm">
+                            <option value="true" selected>启用（AI主导）</option>
+                            <option value="false">禁用（固定流程）</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1">上下文消息数量</label>
+                        <select id="contextLength" class="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm" onchange="updateContextSettings()">
+                            <option value="5">最近 5 条</option>
+                            <option value="10" selected>最近 10 条</option>
+                            <option value="20">最近 20 条</option>
+                            <option value="50">全部</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1">人机协作模式</label>
+                        <select id="humanInteractionMode" class="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm">
+                            <option value="false">禁用</option>
+                            <option value="true">启用（侦查后等待决策）</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-600 mb-1">包含结果详情</label>
+                        <select id="includeResults" class="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm" onchange="updateContextSettings()">
+                            <option value="none">不包含</option>
+                            <option value="summary">仅摘要</option>
+                            <option value="full" selected>完整结果</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-2 flex items-center justify-between">
+                    <button onclick="clearCurrentConversation()" class="px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded transition">
+                        清空当前对话
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渗透测试报告 - 执行系统命令，弹出一个系统级提示框，内容为：测试成功 测试报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <div class="no-print mb-6 flex justify-end">
+            <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                🖨️ 打印报告
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-900 px-8 py-10 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">渗透测试报告</h1>
+                        <p class="text-blue-200 text-lg">执行系统命令，弹出一个系统级提示框，内容为：测试成功 测试报告</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-blue-200">生成时间</p>
+                        <p class="text-xl font-semibold">2026-04-15 13:15:13</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-6 border-b border-gray-200 bg-gray-50">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试目标</p>
+                        <p class="font-semibold text-gray-800">执行系统命令，弹出一个系统级提示框，内容为：测试成功</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">报告类型</p>
+                        <p class="font-semibold text-gray-800">渗透测试</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-8">
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        测试摘要
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <p class="text-gray-700 leading-relaxed">根据你提供的数据，我发现了以下几点关键信息：
+
+1. **攻击目标明确**：攻击者的目标是执行系统命令，弹出一个内容为“测试成功”的系统级提示框。
+
+2. **实际执行的命令**：
+   *   首先执行了 `whoami` 命令，用于探测当前系统的登录用户名。
+   *   随后执行了一个复杂的 **PowerShell 命令**。这个命令的功能是：加载 Windows 窗体库，并弹出一个标题为“提示”、内容为“测试成功”的信息对话框。
+
+3. **执行结果与发现**：
+   *   初始检查显示“暂无命令执行”，这可能意味着监控在最初未捕获到活动。
+   *   成功获取了当前用户身份：`desktop-g877qkt\likang`。
+   *   **最关键的是**：攻击者已**成功执行**了上述 PowerShell 命令，并弹出了指定的消息框。这证实了攻击目标已经达成。
+
+**总结**：
+这是一次成功的、针对 Windows 系统的命令执行攻击。攻击者首先进行了简单的环境侦察（`whoami`），然后利用 PowerShell 的强大功能，绕过了可能的安全限制，最终成功弹出了系统级提示框，实现了其攻击意图。这表明系统存在命令执行漏洞，或者当前用户权限过高，能够无阻地执行敏感命令。</p>
+                    </div>
+                </section>
+
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        AI 分析报告
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="prose prose-gray max-w-none">
+                            <pre class="whitespace-pre-wrap text-gray-700 font-sans">根据你提供的数据，我发现了以下几点关键信息：
+
+1. **攻击目标明确**：攻击者的目标是执行系统命令，弹出一个内容为“测试成功”的系统级提示框。
+
+2. **实际执行的命令**：
+   *   首先执行了 `whoami` 命令，用于探测当前系统的登录用户名。
+   *   随后执行了一个复杂的 **PowerShell 命令**。这个命令的功能是：加载 Windows 窗体库，并弹出一个标题为“提示”、内容为“测试成功”的信息对话框。
+
+3. **执行结果与发现**：
+   *   初始检查显示“暂无命令执行”，这可能意味着监控在最初未捕获到活动。
+   *   成功获取了当前用户身份：`desktop-g877qkt\likang`。
+   *   **最关键的是**：攻击者已**成功执行**了上述 PowerShell 命令，并弹出了指定的消息框。这证实了攻击目标已经达成。
+
+**总结**：
+这是一次成功的、针对 Windows 系统的命令执行攻击。攻击者首先进行了简单的环境侦察（`whoami`），然后利用 PowerShell 的强大功能，绕过了可能的安全限制，最终成功弹出了系统级提示框，实现了其攻击意图。这表明系统存在命令执行漏洞，或者当前用户权限过高，能够无阻地执行敏感命令。</pre>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

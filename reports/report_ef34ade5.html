@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渗透测试报告 - 192.168.1.100 安全报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @page { size: A4; margin: 20mm; }
+        @media print { body { margin: 0; } .no-print { display: none !important; } }
+        .severity-critical { background-color: #dc2626; color: white; }
+        .severity-high { background-color: #ea580c; color: white; }
+        .severity-medium { background-color: #ca8a04; color: white; }
+        .severity-low { background-color: #16a34a; color: white; }
+        .severity-info { background-color: #2563eb; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+        <div class="no-print mb-6 flex justify-end">
+            <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                🖨️ 打印报告
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-900 px-8 py-10 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">渗透测试报告</h1>
+                        <p class="text-blue-200 text-lg">192.168.1.100 安全报告</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-blue-200">生成时间</p>
+                        <p class="text-xl font-semibold">2026-04-08 21:40:41</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-6 border-b border-gray-200 bg-gray-50">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试目标</p>
+                        <p class="font-semibold text-gray-800">192.168.1.100</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">测试类型</p>
+                        <p class="font-semibold text-gray-800">完整扫描</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">风险等级</p>
+                        <p class="font-semibold text-orange-600 font-bold">高危</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-gray-500 text-sm">漏洞总数</p>
+                        <p class="font-semibold text-2xl text-gray-800">3</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-8 py-8">
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        执行摘要
+                    </h2>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <p class="text-gray-700 leading-relaxed">本次渗透测试对目标系统 192.168.1.100 进行了全面的安全评估，发现了多个安全漏洞需要及时修复。</p>
+                    </div>
+                </section>
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        发现结果
+                    </h2>
+                    <div class="space-y-4">
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">开始检测</p>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">发现开放端口：80 (HTTP), 443 (HTTPS), 22 (SSH)</p>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">Web服务器为 Apache/2.4.41</p>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                            <p class="text-gray-700">robots.txt 存在，包含敏感路径信息</p>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        漏洞详情
+                    </h2>
+                    
+                    <div class="mb-6 flex flex-wrap gap-3">
+                        <span class="px-3 py-1 rounded text-sm severity-critical">严重</span>
+                        <span class="px-3 py-1 rounded text-sm severity-high">高危</span>
+                        <span class="px-3 py-1 rounded text-sm severity-medium">中危</span>
+                        <span class="px-3 py-1 rounded text-sm severity-low">低危</span>
+                        <span class="px-3 py-1 rounded text-sm severity-info">信息</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800">SQL注入漏洞</h3>
+                                <span class="px-3 py-1 rounded text-sm severity-high">高危</span>
+                            </div>
+                            <div class="p-6">
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">描述</h4>
+                                    <p class="text-gray-600">在登录表单的用户名参数中发现SQL注入漏洞，攻击者可以通过构造恶意SQL语句来获取数据库敏感信息。</p>
+                                </div>
+                                
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">证据</h4>
+                                    <div class="bg-gray-900 text-green-400 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                                        <pre>' OR '1'='1' --</pre>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div>
+                                    <h4 class="font-semibold text-gray-700 mb-2">修复建议</h4>
+                                    <p class="text-gray-600">使用参数化查询或预编译语句，对用户输入进行严格的验证和过滤。</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800">XSS跨站脚本攻击</h3>
+                                <span class="px-3 py-1 rounded text-sm severity-medium">中危</span>
+                            </div>
+                            <div class="p-6">
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">描述</h4>
+                                    <p class="text-gray-600">在搜索功能中发现反射型XSS漏洞，攻击者可以注入恶意JavaScript代码。</p>
+                                </div>
+                                
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">证据</h4>
+                                    <div class="bg-gray-900 text-green-400 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                                        <pre><script>alert('XSS')</script></pre>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div>
+                                    <h4 class="font-semibold text-gray-700 mb-2">修复建议</h4>
+                                    <p class="text-gray-600">对用户输入进行HTML转义，使用Content Security Policy (CSP)。</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-xl overflow-hidden">
+                            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800">弱密码策略</h3>
+                                <span class="px-3 py-1 rounded text-sm severity-low">低危</span>
+                            </div>
+                            <div class="p-6">
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">描述</h4>
+                                    <p class="text-gray-600">系统允许使用弱密码，如'123456'、'password'等。</p>
+                                </div>
+                                
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold text-gray-700 mb-2">证据</h4>
+                                    <div class="bg-gray-900 text-green-400 rounded-lg p-4 font-mono text-sm overflow-x-auto">
+                                        <pre>密码长度最短为4位，无复杂度要求</pre>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div>
+                                    <h4 class="font-semibold text-gray-700 mb-2">修复建议</h4>
+                                    <p class="text-gray-600">实施强密码策略，要求至少8位长度，包含大小写字母、数字和特殊字符。</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        风险评估
+                    </h2>
+                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-amber-700">75</p>
+                                <p class="text-gray-600 text-sm">风险总分</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-red-600">0</p>
+                                <p class="text-gray-600 text-sm">严重漏洞</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-orange-600">1</p>
+                                <p class="text-gray-600 text-sm">高危漏洞</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-yellow-600">1</p>
+                                <p class="text-gray-600 text-sm">中危漏洞</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <span class="text-xl font-semibold text-orange-600 font-bold px-6 py-2 rounded-full">
+                                总体风险等级: 高危
+                            </span>
+                        </div>
+                    </div>
+                </section>
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        AI分析结果
+                    </h2>
+                    <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                        <div class="whitespace-pre-wrap text-gray-700">基于AI分析，目标系统存在多个安全漏洞。SQL注入漏洞最为严重，可能导致数据库被完全控制。XSS漏洞可能导致用户会话劫持。建议优先修复高危漏洞，然后逐步解决中低危问题。</div>
+                    </div>
+                </section>
+                
+
+                
+                <section class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-8 bg-blue-600 rounded mr-3"></span>
+                        安全建议
+                    </h2>
+                    <div class="space-y-3">
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">立即修复SQL注入漏洞</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">实施Web应用防火墙(WAF)</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">加强密码策略</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">定期进行安全培训</p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <span class="text-green-500 mt-1">✓</span>
+                            <p class="text-gray-700">建立漏洞响应机制</p>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+            </div>
+
+            <div class="bg-gray-100 px-8 py-6 border-t border-gray-200">
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <p>由智能渗透测试系统生成</p>
+                    <p>报告编号: ef34ade5-7c32-4df8-bd16-ef2b42a34961</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
